@@ -24,7 +24,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { Button } from "./ui/button";
-import { useBridge } from "./bridge-context";
+import { useBridge } from "./bridge-state";
 const primary = [
   ["/", "Overview", LayoutDashboard],
   ["/controller", "Controller", Gamepad2],

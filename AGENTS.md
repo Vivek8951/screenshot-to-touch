@@ -1,5 +1,4 @@
 <!-- LOVABLE:BEGIN -->
-
 > [!IMPORTANT]
 > This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
 > published git history — force pushing, or rebasing/amending/squashing commits
@@ -28,7 +27,6 @@ use the editor.
   `LOVABLE_API_KEY`. When Lovable does not provide one, users can bring their
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
-
 <!-- LOVABLE:END -->
 
 ## Application architecture
@@ -36,5 +34,6 @@ use the editor.
 - Keep the TanStack Start web entry at the repository root; `apps/` documents monorepo boundaries without duplicating routers.
 - Pure normalized inputs, profiles, mapping and protocol live in `packages/`; native platform implementations live in `native/` and must never enter the web bundle.
 - One shared browser provider owns pointer input and the paired WebSocket transport across routes, so navigation cannot create competing sessions.
+- Keep context identity and its consumer hook in a non-component module separate from the provider; live component refresh must not give consumers a different context instance.
 - Use explicit browser-local profile storage because local-only operation and local settings are product requirements; never persist a pairing PIN.
 - The Linux companion alone owns uinput, validates the exact protocol and neutralizes on every exit; the web monitor only reports native status received after pairing.

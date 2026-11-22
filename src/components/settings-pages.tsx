@@ -22,7 +22,7 @@ import {
 import { Button } from "./ui/button";
 import { Switch } from "./ui/switch";
 import { PageHeading, Footer } from "./app-shell";
-import { useBridge } from "./bridge-context";
+import { useBridge } from "./bridge-state";
 import { ControllerTool } from "./gamepad";
 import { Metric } from "./dashboard";
 import { BUTTONS } from "../../packages/shared-protocol";

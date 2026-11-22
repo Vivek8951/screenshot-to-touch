@@ -13,7 +13,7 @@ import {
 import { Button } from "./ui/button";
 import { PageHeading, ConnectionStrip, Footer } from "./app-shell";
 import { ControllerTool } from "./gamepad";
-import { useBridge } from "./bridge-context";
+import { useBridge } from "./bridge-state";
 export function Dashboard({ controllerOnly = false }: { controllerOnly?: boolean }) {
   const { output, stats, profile } = useBridge();
   return (

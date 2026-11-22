@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { useBridge } from "./bridge-context";
+import { useBridge } from "./bridge-state";
 import { type ButtonName } from "../../packages/shared-protocol";
 function PressButton({
   name,

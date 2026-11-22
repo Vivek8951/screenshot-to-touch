@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { BridgeContext, type BridgeState } from "./bridge-state";
 import { neutralInput, type InputState, type ButtonName } from "../../packages/shared-protocol";
 import { setButton } from "../../packages/controller-core";
 import { applyProfile } from "../../packages/input-mapping";
@@ -14,29 +15,6 @@ import {
   saveProfiles,
   type Profile,
 } from "../../packages/profiles";
-interface BridgeState {
-  input: InputState;
-  output: InputState;
-  profiles: Profile[];
-  profile: Profile;
-  config: ConnectionConfig;
-  stats: ConnectionStats;
-  fullScreen: boolean;
-  setFullScreen: (on: boolean) => void;
-  updateInput: (patch: Partial<InputState>) => void;
-  press: (name: ButtonName, down: boolean) => void;
-  reset: () => void;
-  setConfig: (patch: Partial<ConnectionConfig>) => void;
-  connect: () => void;
-  disconnect: () => void;
-  selectProfile: (id: string) => void;
-  updateProfile: (patch: Partial<Profile>) => void;
-  addProfile: (profile: Profile) => void;
-  removeProfile: (id: string) => void;
-  message: string;
-  setMessage: (message: string) => void;
-}
-const BridgeContext = createContext<BridgeState | null>(null);
 export function BridgeProvider({ children }: { children: ReactNode }) {
   const [input, setInput] = useState<InputState>(neutralInput);
   const inputRef = useRef(input);
@@ -179,9 +157,4 @@ export function BridgeProvider({ children }: { children: ReactNode }) {
       <div className={fullScreen ? "fullscreen-controller" : ""}>{children}</div>
     </BridgeContext.Provider>
   );
-}
-export function useBridge() {
-  const context = useContext(BridgeContext);
-  if (!context) throw new Error("BridgeProvider is required");
-  return context;
 }
