@@ -45,6 +45,8 @@ The web application stays in the supported root structure rather than introducin
 
 ## Linux development
 
+**Direct gameplay:** after the one-time uinput setup in [Linux setup](docs/linux-setup.md), build the companion and run `bash native/linux-companion/play.sh`. Select your PC's Wi-Fi or USB-tether address. Open the printed `http://PC-IP:8081` on your Android phone, enter the terminal PIN, and test the created gamepad in Steam. The native program serves the real React touch controller locally; no published site or certificate setup is needed for this trusted-network HTTP/WS mode. It is unencrypted—never use it on public/untrusted networks. Actual Android/Steam/GTA V compatibility still needs hardware testing.
+
 ```sh
 cargo test --manifest-path native/linux-companion/Cargo.toml
 cargo build --release --manifest-path native/linux-companion/Cargo.toml

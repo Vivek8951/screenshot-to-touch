@@ -5,7 +5,6 @@ import {
   ArrowRight,
   Gauge,
   Gamepad2,
-  Layers3,
   SlidersHorizontal,
   Timer,
   Wifi,
@@ -15,7 +14,7 @@ import { PageHeading, ConnectionStrip, Footer } from "./app-shell";
 import { ControllerTool } from "./gamepad";
 import { useBridge } from "./bridge-state";
 export function Dashboard({ controllerOnly = false }: { controllerOnly?: boolean }) {
-  const { output, stats, profile } = useBridge();
+  const { output, stats, profile, setFullScreen } = useBridge();
   return (
     <>
       <PageHeading
@@ -23,11 +22,20 @@ export function Dashboard({ controllerOnly = false }: { controllerOnly?: boolean
         subtitle="Your phone. Your controller. Your next great session."
         actions={
           <>
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/profiles">
-                <Layers3 />
-                <span className="desktop-label">My profiles</span>
-              </Link>
+            <Button
+              size="sm"
+              title="Open gameplay controls"
+              onClick={async () => {
+                setFullScreen(true);
+                try {
+                  await document.documentElement.requestFullscreen();
+                } catch {
+                  /* Gameplay layout remains usable when fullscreen is unavailable. */
+                }
+              }}
+            >
+              <Gamepad2 />
+              <span>Play</span>
             </Button>
             <Button variant="outline" size="sm" asChild>
               <Link to="/sensitivity">

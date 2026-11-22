@@ -2,6 +2,8 @@
 
 ## Current delivery
 
+- [x] Add a directly served local phone gameplay controller and Linux launch script, avoiding hosted HTTPS/WSS setup for trusted-network play.
+
 - [x] Create modular project boundaries and shared protocol.
 - [x] Build all requested web pages, touch controller, input tester and local profiles.
 - [x] Implement paired WebSocket client and first-class Wi-Fi/USB configuration.

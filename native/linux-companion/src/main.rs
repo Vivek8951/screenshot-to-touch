@@ -1,4 +1,5 @@
 //! Native Linux process only. This is never bundled into the web application.
+mod local_web;
 use std::{error::Error, time::{Duration, Instant}};
 use evdev::{uinput::VirtualDevice, AbsInfo, AbsoluteAxisCode as A, AttributeSet, BusType, EventType, InputEvent, InputId, KeyCode as K, UinputAbsSetup};
 use futures_util::{SinkExt, StreamExt};
@@ -70,8 +71,13 @@ async fn session(stream:TcpStream,origin:&str,pin:&str,issued:Instant,pc_name:&s
 async fn main()->Result<()>{
  let bind=std::env::var("DSB_BIND").unwrap_or_else(|_|"127.0.0.1:8765".into());
  let origin=std::env::var("DSB_ORIGIN").unwrap_or_else(|_|"http://localhost:8080".into());
+ let http_bind=std::env::var("DSB_HTTP_BIND").unwrap_or_else(|_|"127.0.0.1:8081".into());
  let pc_name=std::env::var("DSB_PC_NAME").unwrap_or_else(|_|"Linux PC".into());
  let listener=TcpListener::bind(&bind).await?;println!("DualSense Bridge PC · WS listening at {bind} · allowed origin {origin}");
+ let http_listener=TcpListener::bind(&http_bind).await?;
+ let ws_port=listener.local_addr()?.port();
+ tokio::spawn(async move{if let Err(error)=local_web::serve(http_listener,ws_port).await{eprintln!("Local controller server stopped: {error}");}});
+ println!("Local gameplay controller: http://{http_bind} · use play.sh to configure phone access and origin together.");
  println!("Use a TLS reverse proxy for the hosted HTTPS controller. One phone at a time. No persistent trusted devices yet.");
  loop{let pin=new_pin();let issued=Instant::now();println!("Pairing PIN: {pin} · expires in 120 seconds");let mut attempts=0;
   loop{let(stream,peer)=tokio::select!{value=timeout(Duration::from_secs(120).saturating_sub(issued.elapsed()),listener.accept())=>match value{Ok(value)=>value?,Err(_)=>break},_=tokio::signal::ctrl_c()=>return Ok(())};println!("Connection from {peer}");let result=session(stream,&origin,&pin,issued,&pc_name).await;match result{Ok(())=>break,Err(error)=>{eprintln!("Session ended: {error}");attempts+=1;if attempts>=5{eprintln!("Too many failed attempts. Cooling down 30 seconds.");tokio::time::sleep(Duration::from_secs(30)).await;break;}if issued.elapsed()>=Duration::from_secs(120){break;}}}

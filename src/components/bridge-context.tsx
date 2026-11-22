@@ -35,10 +35,19 @@ export function BridgeProvider({ children }: { children: ReactNode }) {
   const transport = useRef<ControllerTransport | null>(null);
   const deviceId = useRef("");
   useEffect(() => {
-    setProfiles(loadProfiles(localStorage));
-    setActive(localStorage.getItem("dsb-active-profile") ?? "playstation");
-    deviceId.current = localStorage.getItem("dsb-device-id") ?? crypto.randomUUID();
-    localStorage.setItem("dsb-device-id", deviceId.current);
+    // getRandomValues is available on local HTTP, unlike randomUUID on some browsers.
+    const generatedId = Array.from(crypto.getRandomValues(new Uint8Array(16)), (value) =>
+      value.toString(16).padStart(2, "0"),
+    ).join("");
+    deviceId.current = generatedId;
+    try {
+      setProfiles(loadProfiles(localStorage));
+      setActive(localStorage.getItem("dsb-active-profile") ?? "playstation");
+      deviceId.current = localStorage.getItem("dsb-device-id") ?? generatedId;
+      localStorage.setItem("dsb-device-id", deviceId.current);
+    } catch {
+      setMessage("Browser storage is unavailable. Your controller still works for this session.");
+    }
     setReady(true);
     transport.current = new ControllerTransport(setStats);
     return () => transport.current?.disconnect();

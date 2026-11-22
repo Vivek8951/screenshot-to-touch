@@ -37,3 +37,4 @@ use the editor.
 - Keep context identity and its consumer hook in a non-component module separate from the provider; live component refresh must not give consumers a different context instance.
 - Use explicit browser-local profile storage because local-only operation and local settings are product requirements; never persist a pairing PIN.
 - The Linux companion alone owns uinput, validates the exact protocol and neutralizes on every exit; the web monitor only reports native status received after pairing.
+- The Linux companion embeds a separate local React gameplay entry that reuses the same controller/provider/protocol; allowlisted native HTTP assets and exact-origin WS pairing provide offline trusted-network operation without a second web router.

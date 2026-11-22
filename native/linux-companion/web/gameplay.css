@@ -1,0 +1,359 @@
+:root {
+  --background: oklch(0.145 0.006 260);
+  --foreground: oklch(0.95 0.005 260);
+  --card: oklch(0.185 0.007 260);
+  --primary: oklch(0.64 0.2 254);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.24 0.008 260);
+  --muted: oklch(0.205 0.006 260);
+  --muted-foreground: oklch(0.62 0.018 260);
+  --accent: oklch(0.27 0.012 260);
+  --destructive: oklch(0.68 0.18 23);
+  --border: oklch(0.29 0.008 260);
+  --success: oklch(0.79 0.15 155);
+  --warning: oklch(0.83 0.13 85);
+  --sidebar: oklch(0.125 0.004 260);
+  --stage: oklch(0.16 0.007 260);
+  --shell-top: oklch(0.36 0.013 260);
+  --shell-bottom: oklch(0.225 0.01 260);
+  --control: oklch(0.205 0.008 260);
+  --control-edge: oklch(0.4 0.013 260);
+  --control-face: oklch(0.27 0.008 260);
+  --touch-surface: oklch(0.27 0.007 260);
+  --glow: oklch(0.65 0.22 255 / 0.18);
+  --triangle: oklch(0.8 0.13 160);
+  --circle: oklch(0.76 0.15 22);
+  --square: oklch(0.77 0.13 330);
+  --cross: oklch(0.73 0.16 253);
+  --shadow-control: 0 4px 8px oklch(0.03 0 0 / 0.5), inset 0 1px 1px oklch(0.9 0 0 / 0.15);
+  --shadow-shell: 0 22px 40px oklch(0.03 0 0 / 0.45);
+  --dot: oklch(0.32 0.01 260 / 0.4);
+}
+.gamepad {
+  width: min(100%, 700px);
+  aspect-ratio: 2.05;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+  filter: drop-shadow(var(--shadow-shell));
+}
+.controller-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.shell-main {
+  fill: url(#shellGradient);
+  stroke: var(--control-edge);
+  stroke-width: 1;
+}
+.shell-center {
+  fill: var(--control);
+}
+.shell-highlight {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 5px var(--primary));
+}
+.shell-detail {
+  fill: none;
+  stroke: var(--control-edge);
+  stroke-width: 0.7;
+}
+.shell-gradient-top {
+  stop-color: var(--shell-top);
+}
+.shell-gradient-bottom {
+  stop-color: var(--shell-bottom);
+}
+.game-control {
+  position: absolute;
+  touch-action: none;
+  user-select: none;
+  outline: none;
+  transition:
+    background 0.08s,
+    box-shadow 0.08s;
+  color: var(--foreground);
+  border: 1px solid var(--control-edge);
+  background: var(--control-face);
+  box-shadow: var(--shadow-control);
+  padding: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-sans);
+}
+.game-control:hover {
+  background: var(--shell-top);
+}
+.game-control.pressed {
+  background: var(--glow);
+  border-color: var(--primary);
+  box-shadow:
+    0 0 14px var(--glow),
+    inset 0 0 8px var(--glow);
+  color: var(--primary);
+}
+.shoulder {
+  width: 13%;
+  height: 10%;
+  top: 1%;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 14px 14px 5px 5px;
+  box-shadow: var(--shadow-control);
+}
+.shoulder.left {
+  left: 13%;
+}
+.shoulder.right {
+  right: 13%;
+}
+.trigger-group {
+  position: absolute;
+  top: -9%;
+  width: 13%;
+  height: 9%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.trigger-group.left {
+  left: 13%;
+}
+.trigger-group.right {
+  right: 13%;
+}
+.trigger-group label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
+.trigger-group input {
+  width: 100%;
+  min-width: 0;
+  height: 5px;
+  cursor: pointer;
+  touch-action: none;
+}
+.trigger-value {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--muted-foreground);
+  position: absolute;
+  right: 0;
+  top: -10px;
+}
+.touchpad {
+  left: 35%;
+  top: 13%;
+  width: 30%;
+  height: 32%;
+  border-radius: 10px 10px 15px 15px;
+  background: var(--touch-surface);
+  background-image: radial-gradient(var(--control-edge) 0.6px, transparent 0.6px);
+  background-size: 4px 4px;
+  border-color: var(--control-edge);
+  color: var(--muted-foreground);
+  font-size: 8px;
+  box-shadow: inset 0 1px 3px oklch(0.03 0 0 / 0.4);
+}
+.touchpad span {
+  margin-top: 38px;
+  font-family: var(--font-mono);
+  letter-spacing: 2px;
+}
+.center-button {
+  top: 25%;
+  width: 3.7%;
+  height: 9%;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.create-button {
+  left: 29%;
+}
+.options-button {
+  right: 29%;
+}
+.system-button {
+  left: 46.9%;
+  top: 50%;
+  width: 6.2%;
+  height: 12.7%;
+  border-radius: 50%;
+  background: var(--control);
+}
+.system-button svg {
+  width: 16px;
+}
+.mic-detail {
+  position: absolute;
+  top: 67%;
+  left: 48%;
+  width: 4%;
+  height: 1.2%;
+  border-radius: 8px;
+  background: var(--shell-top);
+}
+.speaker-detail {
+  position: absolute;
+  left: 46%;
+  top: 46%;
+  width: 8%;
+  height: 2%;
+  background-image: radial-gradient(var(--control-edge) 1px, transparent 1px);
+  background-size: 5px 5px;
+}
+.face-button {
+  width: 6.5%;
+  height: 13.3%;
+  border-radius: 50%;
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 400;
+  background: var(--control);
+}
+.face-triangle {
+  left: 77%;
+  top: 18%;
+  color: var(--triangle);
+}
+.face-circle {
+  left: 84.5%;
+  top: 33%;
+  color: var(--circle);
+}
+.face-cross {
+  left: 77%;
+  top: 48%;
+  color: var(--cross);
+}
+.face-square {
+  left: 69.5%;
+  top: 33%;
+  color: var(--square);
+}
+.face-square .symbol {
+  font-size: 22px;
+}
+.face-triangle .symbol {
+  font-size: 26px;
+}
+.dpad {
+  position: absolute;
+  left: 9%;
+  top: 22%;
+  width: 21%;
+  height: 43%;
+}
+.dpad-control {
+  background: var(--control);
+  border-radius: 4px;
+  width: 30%;
+  height: 30%;
+  font-size: 20px;
+  color: var(--muted-foreground);
+  box-shadow: var(--shadow-control);
+}
+.dpad-up {
+  left: 35%;
+  top: 0;
+}
+.dpad-down {
+  left: 35%;
+  bottom: 0;
+}
+.dpad-left {
+  left: 0;
+  top: 35%;
+}
+.dpad-right {
+  right: 0;
+  top: 35%;
+}
+.dpad-center {
+  position: absolute;
+  left: 35%;
+  top: 35%;
+  width: 30%;
+  height: 30%;
+  background: var(--control);
+  border: 1px solid var(--control-edge);
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+}
+.dpad-center:after {
+  content: "";
+  height: 7px;
+  width: 7px;
+  border: 1px solid var(--control-edge);
+  border-radius: 50%;
+}
+.stick {
+  position: absolute;
+  width: 14.5%;
+  height: 29.7%;
+  border-radius: 50%;
+  background: var(--control);
+  border: 2px solid var(--control-edge);
+  box-shadow:
+    inset 0 3px 10px oklch(0.03 0 0 / 0.8),
+    0 1px 0 var(--shell-top);
+  touch-action: none;
+  cursor: grab;
+}
+.stick.left {
+  left: 28%;
+  top: 54%;
+}
+.stick.right {
+  right: 28%;
+  top: 54%;
+}
+.stick.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--glow);
+}
+.stick-knob {
+  position: absolute;
+  left: 12%;
+  top: 12%;
+  width: 76%;
+  height: 76%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 35%, var(--shell-top), var(--control-face));
+  border: 3px solid var(--control-edge);
+  box-shadow: var(--shadow-control);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.stick-knob:after {
+  content: "";
+  height: 70%;
+  width: 70%;
+  border: 1px dashed var(--control-edge);
+  border-radius: 50%;
+}
+.stick-caption {
+  position: absolute;
+  top: 112%;
+  width: 100%;
+  text-align: center;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  pointer-events: none;
+}
+.grip-lines {
+  stroke: var(--control-edge);
+  stroke-width: 0.6;
+  fill: none;
+}
+
+*{box-sizing:border-box;letter-spacing:0}body{margin:0;background:var(--background);color:var(--foreground);font-family:system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}svg{width:20px;height:20px}button{background:var(--secondary);color:var(--foreground);border:1px solid var(--border);border-radius:6px;padding:9px 14px;display:inline-flex;align-items:center;justify-content:center;gap:7px}button:disabled{opacity:.5}input{background:var(--card);color:var(--foreground);border:1px solid var(--border);border-radius:6px;padding:10px;width:150px}input[type=range]{accent-color:var(--primary)}.game-control{display:grid;padding:0}.game-control svg{width:18px}.gameplay-screen{min-height:100svh;display:flex;flex-direction:column;padding:14px 24px;gap:16px}.gameplay-header{display:flex;align-items:center;gap:14px}.gameplay-brand{display:flex;align-items:center;gap:9px}.gameplay-brand svg{color:var(--primary)}.gameplay-status{margin-left:auto;font-size:12px;color:var(--muted-foreground)}.gameplay-pair{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:12px;border-bottom:1px solid var(--border)}.gameplay-pair label{font-size:12px}.gameplay-pair span{font-size:10px;color:var(--warning)}.gameplay-error{color:var(--destructive);font-size:12px;text-align:center;margin:0}.gameplay-controls{flex:1;display:flex;align-items:center;justify-content:center;min-height:240px;padding:40px 8px 10px}.gamepad{width:min(92vw,900px);max-width:100%}.gameplay-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:10px;color:var(--muted-foreground)}.stick-clicks{display:flex;gap:12px}.trigger-group{height:14%;top:-13%}.trigger-group input{height:22px;touch-action:none}.shoulder{height:12%}.gameplay-header button{width:36px;height:36px;padding:0}.gameplay-footer button{min-width:50px;height:36px}.immersive .gameplay-pair{display:none}@media(orientation:landscape) and (max-height:600px){.gameplay-screen{padding:8px 20px;gap:7px}.gameplay-controls{padding:36px 12px 0;min-height:180px}.gamepad{width:min(85vw,calc((100svh - 130px)*2.05))}.gameplay-header{font-size:12px}.gameplay-pair{padding:6px}.gameplay-pair span{display:none}.gameplay-pair input{padding:6px}.gameplay-footer{font-size:9px}.gameplay-footer button{height:27px}.gameplay-header button{height:28px;width:28px}}@media(orientation:portrait){.gameplay-controls{min-height:250px}.gamepad{width:100%}.gameplay-screen{padding:12px}.gameplay-brand{font-size:12px}.gameplay-status{font-size:10px}.gameplay-footer{flex-wrap:wrap}.face-button{font-size:18px}.face-square .symbol{font-size:16px}.face-triangle .symbol{font-size:19px}.dpad-control{font-size:15px}.shoulder{font-size:9px}.touchpad span{font-size:6px;margin-top:15px}.stick-caption{font-size:6px}.trigger-group label{font-size:8px}.trigger-value{font-size:7px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(orientation:landscape) and (max-height:600px){.gameplay-screen{height:100svh;min-height:0}.gameplay-controls{container-type:size;min-height:0;padding:38px 12px 15px}.gameplay-controls .gamepad{width:min(100cqw,calc(100cqh * 2.05))}.gameplay-footer{flex-shrink:0}.gameplay-header{flex-shrink:0}.gameplay-pair{flex-shrink:0}.gameplay-error{flex-shrink:0}}

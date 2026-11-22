@@ -1030,7 +1030,7 @@ export function HelpPage() {
   const items = [
     [
       "Install the Linux companion",
-      "Install Rust using your distribution package manager. From native/linux-companion run cargo run --release. Configure /dev/uinput permissions first. The companion prints its temporary PIN and only reports a virtual gamepad after device creation succeeds. See README and docs/linux-setup.md for exact steps.",
+      "Configure /dev/uinput permissions, build the Linux companion, then run bash native/linux-companion/play.sh from the project folder. Choose your PC’s Wi-Fi or USB tether address. Open the printed local address on your phone, enter the terminal PIN and test in Steam. This direct local mode is unencrypted and only for trusted private networks.",
     ],
     [
       "Steam does not detect the controller",
@@ -1071,7 +1071,9 @@ export function HelpPage() {
               Build and run the native companion on Ubuntu after configuring uinput permissions.
             </li>
             <li>Choose Wi-Fi or enable Android USB tethering.</li>
-            <li>Pair with the PC address and temporary six-digit PIN.</li>
+            <li>
+              Run the Linux play script, open its printed local phone address and enter the PIN.
+            </li>
             <li>Test all buttons, sticks and triggers in Diagnostics.</li>
             <li>Verify the virtual controller in Steam before starting GTA V Legacy.</li>
           </ol>
@@ -1088,8 +1090,8 @@ export function HelpPage() {
         <aside className="aside-section">
           <h3>Linux quick start</h3>
           <div className="code-block">
-            sudo modprobe uinput{"\n"}ip -br address{"\n"}cd native/linux-companion{"\n"}cargo run
-            --release
+            cargo build --release --manifest-path native/linux-companion/Cargo.toml{"\n"}
+            bash native/linux-companion/play.sh
           </div>
           <Notice type="warning">
             Configure uinput access and read the security guide before running. Do not run the

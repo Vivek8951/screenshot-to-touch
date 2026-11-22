@@ -30,6 +30,23 @@ Log out and back in for group membership. If the module must survive restart, co
 
 ## Build and run
 
+### Direct phone gameplay (recommended for a trusted private network)
+
+After configuring uinput permissions above, from the project root:
+
+```sh
+cargo build --release --manifest-path native/linux-companion/Cargo.toml
+bash native/linux-companion/play.sh
+```
+
+Choose the PC's Wi-Fi or USB-tether IPv4 address shown by the script. It binds both services to that interface and prints `http://PC-IP:8081`. Open that exact address on the phone and enter the terminal PIN. The phone gets the controller directly from Linux; no hosted site, Bun installation, internet or certificate is required at runtime. Use L3/R3 controls for stick clicks, both analog triggers, and fullscreen for gameplay. The active-gamepad status only appears after native uinput creation succeeds.
+
+This HTTP/WS path is **unencrypted**: only use a trusted private network or isolated USB tethering, and restrict TCP ports 8081 and 8765 to the phone. For untrusted networks use properly provisioned TLS, not this shortcut. Browser local-network permissions still vary and require actual Android testing.
+
+The controller is bundled into the Rust executable. To change its React source, run `bun build apps/controller-web/gameplay-entry.tsx --target browser --minify --outfile native/linux-companion/web/gameplay.js` from the project root, then rebuild Rust. The prebuilt bundle is provided so users can build the native executable without Bun.
+
+### Hosted controller development
+
 From the repository root:
 
 ```sh
