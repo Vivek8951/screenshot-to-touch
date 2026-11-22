@@ -10,33 +10,193 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CompanionRouteImport } from './routes/companion'
+import { Route as ConnectionRouteImport } from './routes/connection'
+import { Route as ControllerRouteImport } from './routes/controller'
+import { Route as DiagnosticsRouteImport } from './routes/diagnostics'
+import { Route as HapticsRouteImport } from './routes/haptics'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as MappingRouteImport } from './routes/mapping'
+import { Route as MotionRouteImport } from './routes/motion'
+import { Route as PairingRouteImport } from './routes/pairing'
+import { Route as ProfilesRouteImport } from './routes/profiles'
+import { Route as SensitivityRouteImport } from './routes/sensitivity'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanionRoute = CompanionRouteImport.update({
+  id: '/companion',
+  path: '/companion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectionRoute = ConnectionRouteImport.update({
+  id: '/connection',
+  path: '/connection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControllerRoute = ControllerRouteImport.update({
+  id: '/controller',
+  path: '/controller',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnosticsRoute = DiagnosticsRouteImport.update({
+  id: '/diagnostics',
+  path: '/diagnostics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HapticsRoute = HapticsRouteImport.update({
+  id: '/haptics',
+  path: '/haptics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MappingRoute = MappingRouteImport.update({
+  id: '/mapping',
+  path: '/mapping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MotionRoute = MotionRouteImport.update({
+  id: '/motion',
+  path: '/motion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PairingRoute = PairingRouteImport.update({
+  id: '/pairing',
+  path: '/pairing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilesRoute = ProfilesRouteImport.update({
+  id: '/profiles',
+  path: '/profiles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SensitivityRoute = SensitivityRouteImport.update({
+  id: '/sensitivity',
+  path: '/sensitivity',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/companion': typeof CompanionRoute
+  '/connection': typeof ConnectionRoute
+  '/controller': typeof ControllerRoute
+  '/diagnostics': typeof DiagnosticsRoute
+  '/haptics': typeof HapticsRoute
+  '/help': typeof HelpRoute
+  '/mapping': typeof MappingRoute
+  '/motion': typeof MotionRoute
+  '/pairing': typeof PairingRoute
+  '/profiles': typeof ProfilesRoute
+  '/sensitivity': typeof SensitivityRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/companion': typeof CompanionRoute
+  '/connection': typeof ConnectionRoute
+  '/controller': typeof ControllerRoute
+  '/diagnostics': typeof DiagnosticsRoute
+  '/haptics': typeof HapticsRoute
+  '/help': typeof HelpRoute
+  '/mapping': typeof MappingRoute
+  '/motion': typeof MotionRoute
+  '/pairing': typeof PairingRoute
+  '/profiles': typeof ProfilesRoute
+  '/sensitivity': typeof SensitivityRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/companion': typeof CompanionRoute
+  '/connection': typeof ConnectionRoute
+  '/controller': typeof ControllerRoute
+  '/diagnostics': typeof DiagnosticsRoute
+  '/haptics': typeof HapticsRoute
+  '/help': typeof HelpRoute
+  '/mapping': typeof MappingRoute
+  '/motion': typeof MotionRoute
+  '/pairing': typeof PairingRoute
+  '/profiles': typeof ProfilesRoute
+  '/sensitivity': typeof SensitivityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/companion'
+    | '/connection'
+    | '/controller'
+    | '/diagnostics'
+    | '/haptics'
+    | '/help'
+    | '/mapping'
+    | '/motion'
+    | '/pairing'
+    | '/profiles'
+    | '/sensitivity'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/companion'
+    | '/connection'
+    | '/controller'
+    | '/diagnostics'
+    | '/haptics'
+    | '/help'
+    | '/mapping'
+    | '/motion'
+    | '/pairing'
+    | '/profiles'
+    | '/sensitivity'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/companion'
+    | '/connection'
+    | '/controller'
+    | '/diagnostics'
+    | '/haptics'
+    | '/help'
+    | '/mapping'
+    | '/motion'
+    | '/pairing'
+    | '/profiles'
+    | '/sensitivity'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CompanionRoute: typeof CompanionRoute
+  ConnectionRoute: typeof ConnectionRoute
+  ControllerRoute: typeof ControllerRoute
+  DiagnosticsRoute: typeof DiagnosticsRoute
+  HapticsRoute: typeof HapticsRoute
+  HelpRoute: typeof HelpRoute
+  MappingRoute: typeof MappingRoute
+  MotionRoute: typeof MotionRoute
+  PairingRoute: typeof PairingRoute
+  ProfilesRoute: typeof ProfilesRoute
+  SensitivityRoute: typeof SensitivityRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +208,107 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/companion': {
+      id: '/companion'
+      path: '/companion'
+      fullPath: '/companion'
+      preLoaderRoute: typeof CompanionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connection': {
+      id: '/connection'
+      path: '/connection'
+      fullPath: '/connection'
+      preLoaderRoute: typeof ConnectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/controller': {
+      id: '/controller'
+      path: '/controller'
+      fullPath: '/controller'
+      preLoaderRoute: typeof ControllerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostics': {
+      id: '/diagnostics'
+      path: '/diagnostics'
+      fullPath: '/diagnostics'
+      preLoaderRoute: typeof DiagnosticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haptics': {
+      id: '/haptics'
+      path: '/haptics'
+      fullPath: '/haptics'
+      preLoaderRoute: typeof HapticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mapping': {
+      id: '/mapping'
+      path: '/mapping'
+      fullPath: '/mapping'
+      preLoaderRoute: typeof MappingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/motion': {
+      id: '/motion'
+      path: '/motion'
+      fullPath: '/motion'
+      preLoaderRoute: typeof MotionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pairing': {
+      id: '/pairing'
+      path: '/pairing'
+      fullPath: '/pairing'
+      preLoaderRoute: typeof PairingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profiles': {
+      id: '/profiles'
+      path: '/profiles'
+      fullPath: '/profiles'
+      preLoaderRoute: typeof ProfilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sensitivity': {
+      id: '/sensitivity'
+      path: '/sensitivity'
+      fullPath: '/sensitivity'
+      preLoaderRoute: typeof SensitivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CompanionRoute: CompanionRoute,
+  ConnectionRoute: ConnectionRoute,
+  ControllerRoute: ControllerRoute,
+  DiagnosticsRoute: DiagnosticsRoute,
+  HapticsRoute: HapticsRoute,
+  HelpRoute: HelpRoute,
+  MappingRoute: MappingRoute,
+  MotionRoute: MotionRoute,
+  PairingRoute: PairingRoute,
+  ProfilesRoute: ProfilesRoute,
+  SensitivityRoute: SensitivityRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
